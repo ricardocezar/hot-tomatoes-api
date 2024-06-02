@@ -5,10 +5,13 @@ import com.example.hot_tomatoes_api.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor
 public class LoadDatabase {
+    private final Logger logger = Logger.getLogger(LoadDatabase.class.getName());
     private final MovieDataTransformer movieDataTransformer;
     private final MovieRepository movieRepository;
 
@@ -20,6 +23,7 @@ public class LoadDatabase {
                 movieRepository.save(newMovie);
                 audit.addSuccessfulLine();
             } catch (Exception e) {
+                logger.log(Level.SEVERE, e.getMessage(), e);
                 audit.addFailedLine(csvBean.toString(), e.getMessage());
             }
         }

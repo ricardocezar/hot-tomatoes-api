@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class ProducerRepository implements com.example.hot_tomatoes_api.repository.ProducerRepository {
+public class ProducerH2Repository implements com.example.hot_tomatoes_api.repository.ProducerRepository {
     private final ProducerDao producerDao;
 
     @Override

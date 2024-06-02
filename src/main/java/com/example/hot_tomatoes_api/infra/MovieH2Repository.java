@@ -8,6 +8,7 @@ import com.example.hot_tomatoes_api.infra.entity.AwardEntity;
 import com.example.hot_tomatoes_api.infra.entity.MovieEntity;
 import com.example.hot_tomatoes_api.infra.entity.ProducerEntity;
 import com.example.hot_tomatoes_api.infra.mapper.MovieMapper;
+import com.example.hot_tomatoes_api.repository.MovieRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class MovieRepository implements com.example.hot_tomatoes_api.repository.MovieRepository {
+public class MovieH2Repository implements MovieRepository {
     private final MovieDao movieDao;
     private final ProducerDao producerDao;
     private final AwardDao awardDao;

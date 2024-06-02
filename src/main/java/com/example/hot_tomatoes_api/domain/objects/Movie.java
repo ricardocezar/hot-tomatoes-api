@@ -1,13 +1,13 @@
 package com.example.hot_tomatoes_api.domain.objects;
 
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter @Setter
 public class Movie {
     private Year year;
     private String title;

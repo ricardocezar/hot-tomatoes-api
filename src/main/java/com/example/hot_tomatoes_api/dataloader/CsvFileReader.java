@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CsvFileReader {
+    private CsvFileReader(){}
     private static final Logger logger = Logger.getLogger(CsvFileReader.class.getName());
 
     public static List<CsvBean> readCsvFile(String filePath) {

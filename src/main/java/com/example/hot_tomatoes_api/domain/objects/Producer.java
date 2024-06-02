@@ -1,13 +1,16 @@
 package com.example.hot_tomatoes_api.domain.objects;
 
-import lombok.Data;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter @Setter
 public class Producer {
     private String name;
+    @Setter(AccessLevel.NONE)
     private List<Movie> movies = new ArrayList<>();
 
     public void addMovie(Movie movie) {

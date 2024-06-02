@@ -8,7 +8,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "movie", uniqueConstraints = @UniqueConstraint(columnNames = {"releaseYear", "title"}))
-public class MovieEntity {
+public class MovieEntity implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
