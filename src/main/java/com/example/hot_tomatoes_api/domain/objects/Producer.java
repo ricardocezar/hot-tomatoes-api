@@ -1,12 +1,13 @@
 package com.example.hot_tomatoes_api.domain.objects;
 
+import com.example.hot_tomatoes_api.domain.MaximumIntervalBetweenAwardsCalculator;
+import com.example.hot_tomatoes_api.domain.MinimalIntervalBetweenAwardsCalculator;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +17,8 @@ public class Producer {
     private String name;
     @Setter(AccessLevel.NONE)
     private List<Movie> movies = new ArrayList<>();
-    private Movie first = null;
-    private Movie second = null;
+    private PairOfMovies closest;
+    private PairOfMovies farthest;
 
     public Producer(String name) {
         if (name == null || name.isBlank()) {
@@ -53,63 +54,29 @@ public class Producer {
 
     public Optional<PairOfMovies> getClosestAwardedMovies() {
         minimalIntervalBetweenAwards();
-        if (first == null || second == null) {
-            return Optional.empty();
-        }
-        return Optional.of(new PairOfMovies(first, second));
+        return Optional.ofNullable(closest);
     }
 
     public Integer minimalIntervalBetweenAwards() {
-        if (movies.isEmpty() || getAwardedMovies().isEmpty()) {
+        var minimalIntervalCalculator = new MinimalIntervalBetweenAwardsCalculator();
+        closest = minimalIntervalCalculator.calculate(getAwardedMovies());
+        if (closest == null) {
             return null;
         }
-        if (getAwardedMovies().size() == 1) {
-            return 0;
-        }
-        var orderedMovies = getAwardedMovies().stream()
-                .sorted(Comparator.comparingInt(m -> m.getYear().value())).toList();
-        int smallestInterval = 1000000;
-        for (int i = 1; i < orderedMovies.size(); i++) {
-            Movie movie1 = orderedMovies.get(i - 1);
-            Movie movie2 = orderedMovies.get(i);
-            int interval = movie2.getYear().value() - movie1.getYear().value();
-            if (interval < smallestInterval) {
-                smallestInterval = interval;
-                this.first = movie1;
-                this.second = movie2;
-            }
-        }
-        return smallestInterval;
+        return closest.getInterval();
     }
 
     public Optional<PairOfMovies> getFarthestAwardedMovies() {
         maximumIntervalBetweenAwards();
-        if (first == null || second == null) {
-            return Optional.empty();
-        }
-        return Optional.of(new PairOfMovies(first, second));
+        return Optional.of(farthest);
     }
 
     public Integer maximumIntervalBetweenAwards() {
-        if (movies.isEmpty() || getAwardedMovies().isEmpty()) {
+        var maximumIntervalCalculator = new MaximumIntervalBetweenAwardsCalculator();
+        farthest = maximumIntervalCalculator.calculate(getAwardedMovies());
+        if (farthest == null) {
             return null;
         }
-        if (getAwardedMovies().size() == 1) {
-            return 0;
-        }
-        var orderedMovies = getAwardedMovies().stream()
-                .sorted(Comparator.comparingInt(m -> m.getYear().value())).toList();
-        int bigestInterval = -1;
-        for (int i = 1; i < orderedMovies.size(); i++) {
-            Movie movie1 = orderedMovies.get(i - 1);
-            Movie movie2 = orderedMovies.get(i);
-            int interval = movie2.getYear().value() - movie1.getYear().value();
-            if (interval > bigestInterval) {
-                bigestInterval = interval;
-                this.first = movie1;
-                this.second = movie2;
-            }
-        }
-        return bigestInterval;
+        return farthest.getInterval();
     }
 }
