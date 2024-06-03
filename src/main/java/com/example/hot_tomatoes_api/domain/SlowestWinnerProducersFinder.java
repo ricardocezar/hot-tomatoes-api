@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class SlowestWinnerProducersFinder {
@@ -18,14 +17,14 @@ public class SlowestWinnerProducersFinder {
             return List.of();
         }
         Producer slowestWinner = multiAwardedProducers.stream()
-                .max(Comparator.comparingInt(Producer::firstToLastAwardedMovieInterval)).get();
+                .max(Comparator.comparingInt(Producer::minimalIntervalBetweenAwards)).get();
         return multiAwardedProducers.stream()
-                .filter(p -> Objects.equals(p.firstToLastAwardedMovieInterval(), slowestWinner.firstToLastAwardedMovieInterval()))
+                .filter(p -> Objects.equals(p.minimalIntervalBetweenAwards(), slowestWinner.minimalIntervalBetweenAwards()))
                 .map(p -> new DistinguishedProducer(
                         p.getName(),
-                        p.firstToLastAwardedMovieInterval(),
-                        p.getFirstAwardedMovie().getYear(),
-                        p.getLastAwardedMovie().getYear()))
-                .collect(Collectors.toList());
+                        p.minimalIntervalBetweenAwards(),
+                        p.getClosestAwardedMovies().get().getFirst().getYear(),
+                        p.getClosestAwardedMovies().get().getLast().getYear()))
+                .toList();
     }
 }

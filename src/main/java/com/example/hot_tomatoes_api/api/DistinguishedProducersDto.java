@@ -1,14 +1,26 @@
 package com.example.hot_tomatoes_api.api;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-public class DistinguishedProducersDto {
-    private List<DistinguishedProducerDto> min = new ArrayList<>();
-    private List<DistinguishedProducerDto> max = new ArrayList<>();
-}
+@Getter @Setter
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class DistinguishedProducersDto implements Serializable {
+    private List<DistinguishedProducerDto> min;
+    private List<DistinguishedProducerDto> max;
 
-record DistinguishedProducerDto (String producer, int interval, int previousWin, int followingWin) {}
+    public DistinguishedProducersDto(List<DistinguishedProducerDto> min, List<DistinguishedProducerDto> max) {
+        this.min = min;
+        this.max = max;
+    }
+
+    public DistinguishedProducersDto() {
+        this.min = new ArrayList<>();
+        this.max = new ArrayList<>();
+    }
+}

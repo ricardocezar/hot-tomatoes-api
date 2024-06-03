@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "min": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "producer": { "type": "string" },
+          "interval": { "type": "integer" },
+          "previousWin": { "type": "integer" },
+          "followingWin": { "type": "integer" }
+        },
+        "required": ["producer", "interval", "previousWin", "followingWin"]
+      }
+    },
+    "max": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "producer": { "type": "string" },
+          "interval": { "type": "integer" },
+          "previousWin": { "type": "integer" },
+          "followingWin": { "type": "integer" }
+        },
+        "required": ["producer", "interval", "previousWin", "followingWin"]
+      }
+    }
+  }
+}

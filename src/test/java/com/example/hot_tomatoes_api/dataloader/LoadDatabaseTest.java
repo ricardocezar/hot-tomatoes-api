@@ -1,6 +1,6 @@
 package com.example.hot_tomatoes_api.dataloader;
 
-import com.example.hot_tomatoes_api.dataloader.factory.CsvBeanFactory;
+import com.example.hot_tomatoes_api.factory.CsvBeanFactory;
 import com.example.hot_tomatoes_api.domain.objects.Movie;
 import com.example.hot_tomatoes_api.repository.MovieRepository;
 import org.junit.jupiter.api.DisplayName;

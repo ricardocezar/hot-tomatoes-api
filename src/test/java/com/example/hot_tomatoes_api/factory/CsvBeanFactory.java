@@ -1,4 +1,4 @@
-package com.example.hot_tomatoes_api.dataloader.factory;
+package com.example.hot_tomatoes_api.factory;
 
 import com.example.hot_tomatoes_api.dataloader.CsvBean;
 
