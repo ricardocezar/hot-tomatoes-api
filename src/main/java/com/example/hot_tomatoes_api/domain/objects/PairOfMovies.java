@@ -11,4 +11,8 @@ public class PairOfMovies {
         this.first = first;
         this.last = last;
     }
+
+    public int getInterval() {
+        return last.getYear().value() - first.getYear().value();
+    }
 }

@@ -16,6 +16,14 @@ public class SlowestWinnerProducersFinder {
         if (multiAwardedProducers.isEmpty()) {
             return List.of();
         }
+        if (multiAwardedProducers.size() == 1) {
+            var pair = multiAwardedProducers.get(0).getFarthestAwardedMovies().get();
+            return List.of(new DistinguishedProducer(
+                    multiAwardedProducers.get(0).getName(),
+                    pair.getInterval(),
+                    pair.getFirst().getYear(),
+                    pair.getLast().getYear()));
+        }
         Producer slowestWinner = multiAwardedProducers.stream()
                 .max(Comparator.comparingInt(Producer::minimalIntervalBetweenAwards)).get();
         return multiAwardedProducers.stream()

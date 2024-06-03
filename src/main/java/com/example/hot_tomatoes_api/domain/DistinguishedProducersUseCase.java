@@ -22,6 +22,9 @@ public class DistinguishedProducersUseCase {
         }
         List<DistinguishedProducer> fastestWinners = fastestWinnerProducersFinder.execute(awardedProducers);
         List<DistinguishedProducer> slowestWinners = slowestWinnerProducersFinder.execute(awardedProducers);
+        if (fastestWinners.isEmpty() && slowestWinners.isEmpty()) {
+            return Map.of();
+        }
         return Map.of(
                 "min", fastestWinners,
                 "max", slowestWinners

@@ -81,4 +81,35 @@ public class Producer {
         }
         return smallestInterval;
     }
+
+    public Optional<PairOfMovies> getFarthestAwardedMovies() {
+        maximumIntervalBetweenAwards();
+        if (first == null || second == null) {
+            return Optional.empty();
+        }
+        return Optional.of(new PairOfMovies(first, second));
+    }
+
+    public Integer maximumIntervalBetweenAwards() {
+        if (movies.isEmpty() || getAwardedMovies().isEmpty()) {
+            return null;
+        }
+        if (getAwardedMovies().size() == 1) {
+            return 0;
+        }
+        var orderedMovies = getAwardedMovies().stream()
+                .sorted(Comparator.comparingInt(m -> m.getYear().value())).toList();
+        int bigestInterval = -1;
+        for (int i = 1; i < orderedMovies.size(); i++) {
+            Movie movie1 = orderedMovies.get(i - 1);
+            Movie movie2 = orderedMovies.get(i);
+            int interval = movie2.getYear().value() - movie1.getYear().value();
+            if (interval > bigestInterval) {
+                bigestInterval = interval;
+                this.first = movie1;
+                this.second = movie2;
+            }
+        }
+        return bigestInterval;
+    }
 }
