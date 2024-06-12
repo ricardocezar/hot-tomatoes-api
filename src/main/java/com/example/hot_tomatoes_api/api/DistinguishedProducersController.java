@@ -1,6 +1,6 @@
 package com.example.hot_tomatoes_api.api;
 
-import com.example.hot_tomatoes_api.domain.DistinguishedProducersUseCase;
+import com.example.hot_tomatoes_api.domain.distinguished_producers_usecase.DistinguishedProducersUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 @RequestMapping("/distinguished-producers")
 @RequiredArgsConstructor
 public class DistinguishedProducersController {
-    private static final Logger logger = Logger.getLogger(DistinguishedProducersController.class.getName());
     private final DistinguishedProducersUseCase distinguishedProducersUseCase;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

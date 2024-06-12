@@ -17,7 +17,7 @@ public class MovieDataTransformer {
         movie.setYear(new Year(Integer.parseInt(csvBean.getYear())));
         movie.setTitle(csvBean.getTitle());
         movie.addProducers(producerDataTransformer.producerTransformer(csvBean.getProducers()));
-        movie.setAwardWinner(Objects.equals("yes", csvBean.getWinner()));
+        movie.setAwardWinner(Objects.equals("yes", csvBean.getWinner().trim()));
         return movie;
     }
 }

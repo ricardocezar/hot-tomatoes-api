@@ -1,6 +1,6 @@
 package com.example.hot_tomatoes_api.api;
 
-import com.example.hot_tomatoes_api.domain.objects.DistinguishedProducer;
+import com.example.hot_tomatoes_api.domain.distinguished_producers_usecase.DistinguishedProducer;
 
 import java.util.List;
 import java.util.Map;

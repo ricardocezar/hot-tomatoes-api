@@ -1,8 +1,6 @@
 package com.example.hot_tomatoes_api.api;
 
-import com.example.hot_tomatoes_api.domain.DistinguishedProducersUseCase;
-import com.example.hot_tomatoes_api.domain.FastestWinnerProducersFinder;
-import com.example.hot_tomatoes_api.domain.SlowestWinnerProducersFinder;
+import com.example.hot_tomatoes_api.domain.distinguished_producers_usecase.DistinguishedProducersUseCase;
 import com.example.hot_tomatoes_api.factory.MovieFactory;
 import com.example.hot_tomatoes_api.repository.ProducerRepository;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -24,8 +22,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @SpringBootTest(classes =
-        {DistinguishedProducersController.class, DistinguishedProducersUseCase.class,
-                FastestWinnerProducersFinder.class, SlowestWinnerProducersFinder.class})
+        {DistinguishedProducersController.class, DistinguishedProducersUseCase.class})
 @AutoConfigureMockMvc
 @AutoConfigureWebMvc
 @DisplayName("DistinguishedProducersController")

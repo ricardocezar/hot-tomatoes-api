@@ -69,4 +69,22 @@ public class MovieFactory {
                 .addMovie(new Movie(1995, randomTitle(),  false));
         return List.of(johnProducer, maryProducer);
     }
+
+    public static List<Producer> scenarioMoreThanOneDistinguishedProducer() {
+        Producer johnProducer = new Producer("John Mark");
+        johnProducer
+                .addMovie(new Movie(1999, randomTitle(), true))
+                .addMovie(new Movie(2000, randomTitle(),  true))
+                .addMovie(new Movie(2003, randomTitle(),  false))
+                .addMovie(new Movie(2008, randomTitle(),  true));
+        Producer maryProducer = new Producer("Mary McPerson");
+        maryProducer
+                .addMovie(new Movie(1990, randomTitle(), true))
+                .addMovie(new Movie(1995, randomTitle(),  true));
+        Producer jolene = new Producer("Jolene");
+        jolene
+                .addMovie(new Movie(1983, randomTitle(), true))
+                .addMovie(new Movie(1991, randomTitle(),  true));
+        return List.of(johnProducer, maryProducer, jolene);
+    }
 }
